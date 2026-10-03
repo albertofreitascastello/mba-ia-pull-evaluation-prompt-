@@ -131,7 +131,11 @@ Agora que você tem o prompt inicial, é hora de refatorá-lo usando as técnica
    - **Skeleton of Thought**: Estruturar a resposta em etapas claras
    - **ReAct**: Raciocínio + Ação para tarefas complexas
    - **Role Prompting**: Definir persona e contexto detalhado
-4. Documentar no `README.md` quais técnicas você escolheu e por quê
+4. No prompt v2 foram escolhidas estas técnicas:
+  - **Few-shot Learning**: dois exemplos contrastantes (fluxo de interface e autorização) mostram entradas e histórias com critérios verificáveis, orientando o formato e o nível de detalhe.
+  - **Role Prompting**: a persona de Product Manager mantém a resposta focada na necessidade do usuário e em requisitos de produto.
+  - **Skeleton of Thought**: o formato fixo separa User Story, Critérios de Aceitação e Contexto Técnico quando houver evidências técnicas.
+5. Documentar no `README.md` quais técnicas você escolheu e por quê
 
 **Requisitos do prompt otimizado:**
 
