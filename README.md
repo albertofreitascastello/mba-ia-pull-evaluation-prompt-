@@ -136,14 +136,29 @@ O principal desafio durante a otimização foi o **F1-Score**, que permaneceu ab
 
 ### Visão Geral
 
-| Versão | Helpfulness | Correctness | F1 | Clarity | Precision | Média | Status |
-|---|---:|---:|---:|---:|---:|---:|---|
-| V1.0 | 0.84 | 0.78 | 0.73 | 0.86 | 0.83 | 0.8094 | Reprovado |
-| V2.1 | 0.87 | 0.80 | 0.75 | 0.88 | 0.85 | 0.8311 | Reprovado |
-| V2.2 | 0.85 | 0.78 | 0.75 | 0.89 | 0.82 | 0.8181 | Reprovado |
-| V2.3 | 0.86 | 0.78 | 0.73 | 0.87 | 0.84 | 0.8150 | Reprovado |
-| V2.4 | 0.87 | 0.79 | 0.74 | 0.88 | 0.85 | 0.8256 | Reprovado |
-| V2.5 | 0.88 | 0.82 | 0.78 | 0.90 | 0.86 | 0.8465 | Reprovado |
+A jornada de otimização foi dividida em duas etapas:
+
+1. **Otimização do prompt**, evoluindo da V1.0 até a V2.5.
+2. **Benchmark de modelos**, mantendo o prompt V2.5 fixo e alterando apenas o modelo principal.
+
+Essa segunda etapa foi decisiva para alcançar a aprovação, pois a V2.5 ainda apresentava F1 abaixo de `0.8` com o modelo original.
+
+| Etapa | Versão / Modelo | Helpfulness | Correctness | F1 | Clarity | Precision | Média | Status |
+|---|---|---:|---:|---:|---:|---:|---:|---|
+| Prompt | V1.0 | 0.84 | 0.78 | 0.73 | 0.86 | 0.83 | 0.8094 | Reprovado |
+| Prompt | V2.1 | 0.87 | 0.80 | 0.75 | 0.88 | 0.85 | 0.8311 | Reprovado |
+| Prompt | V2.2 | 0.85 | 0.78 | 0.75 | 0.89 | 0.82 | 0.8181 | Reprovado |
+| Prompt | V2.3 | 0.86 | 0.78 | 0.73 | 0.87 | 0.84 | 0.8150 | Reprovado |
+| Prompt | V2.4 | 0.87 | 0.79 | 0.74 | 0.88 | 0.85 | 0.8256 | Reprovado |
+| Prompt | V2.5 + GPT-4o-mini | 0.88 | 0.82 | 0.78 | 0.90 | 0.86 | 0.8465 | Reprovado |
+| Modelo | V2.5 + GPT-5.6 Luna | 0.87 | 0.83 | 0.81 | 0.89 | 0.86 | 0.8505 | **Aprovado** |
+| Modelo | V2.5 + GPT-5.6 Terra | 0.86 | 0.82 | 0.80 | 0.88 | 0.83 | 0.8381 | **Aprovado** |
+| Modelo | V2.5 + GPT-5.5 | 0.89 | 0.85 | 0.81 | 0.89 | 0.89 | 0.8636 | **Aprovado** |
+| Modelo | **V2.5 + Gemini 2.5 Flash** | 0.88 | 0.85 | **0.82** | 0.89 | 0.88 | **0.8645** | **Aprovado** |
+
+A primeira aprovação ocorreu ao manter o prompt V2.5 e substituir o modelo principal pelo **GPT-5.6 Luna**, elevando o F1 de `0.78` para `0.81`.
+
+Em seguida, outros modelos foram avaliados com o mesmo prompt e o mesmo dataset. O melhor resultado final foi obtido com **Gemini 2.5 Flash**, que alcançou F1 `0.82` e média geral `0.8645`.
 
 ### V1.0 — Baseline
 
@@ -232,6 +247,30 @@ Resultado:
 | 0.87 | 0.79 | 0.74 | 0.88 | 0.85 | 0.8256 |
 
 Houve uma melhora pequena, porém consistente.
+
+
+### Etapa de Benchmark de Modelos
+
+Após concluir a otimização do prompt na V2.5, nenhuma nova alteração foi feita no conteúdo do prompt.
+
+O objetivo passou a ser verificar se a escolha do modelo principal poderia melhorar a aderência ao ground truth sem alterar a estratégia de Prompt Engineering.
+
+A sequência de testes foi:
+
+| Modelo | Helpfulness | Correctness | F1 | Clarity | Precision | Média | Status |
+|---|---:|---:|---:|---:|---:|---:|---|
+| GPT-4o-mini | 0.88 | 0.82 | 0.78 | 0.90 | 0.86 | 0.8465 | Reprovado |
+| GPT-5.6 Luna | 0.87 | 0.83 | 0.81 | 0.89 | 0.86 | 0.8505 | **Aprovado** |
+| GPT-5.6 Terra | 0.86 | 0.82 | 0.80 | 0.88 | 0.83 | 0.8381 | **Aprovado** |
+| GPT-5.5 | 0.89 | 0.85 | 0.81 | 0.89 | 0.89 | 0.8636 | **Aprovado** |
+| **Gemini 2.5 Flash** | 0.88 | 0.85 | **0.82** | 0.89 | 0.88 | **0.8645** | **Aprovado** |
+
+Essa etapa demonstrou que a aprovação não veio apenas da evolução do prompt. A V2.5 melhorou significativamente a qualidade, mas ainda ficou abaixo do limite mínimo de F1 com GPT-4o-mini.
+
+A troca do modelo principal foi o fator que permitiu ultrapassar o limite de `0.8` em todas as métricas.
+
+O **Gemini 2.5 Flash** foi escolhido como configuração final por apresentar a maior média geral e o maior F1 entre os modelos testados.
+
 
 ---
 
