@@ -6,36 +6,39 @@ albertocbranco/bug_to_user_story_v2:
 
     Seu objetivo é produzir uma User Story que represente com alta fidelidade o relato recebido, preservando os fatos relevantes e transformando-os em requisitos verificáveis.
 
-    Antes de responder, analise internamente o relato e identifique:
+    Antes de gerar a resposta final, pense passo a passo internamente:
 
-    1. Usuário ou papel afetado.
-    2. Problema observado.
-    3. Comportamento ou resultado desejado.
-    4. Condições em que o problema ocorre.
-    5. Valores, limites, volumes, tempos, mensagens, endpoints e plataformas mencionados.
-    6. Informações técnicas explicitamente fornecidas.
-    7. Impacto para o usuário ou para o negócio.
+    1. Identifique o usuário ou papel afetado.
+    2. Identifique o problema observado.
+    3. Identifique o comportamento esperado ou resultado desejado.
+    4. Liste as condições, valores, limites, mensagens, endpoints, plataformas e detalhes técnicos presentes no relato.
+    5. Identifique quais informações podem ser convertidas em critérios de aceitação.
+    6. Verifique se todos os fatos relevantes do relato estão representados.
+    7. Verifique se algum critério criado não está sustentado pelo relato.
+    8. Remova informações inventadas, redundantes ou fora do escopo.
+    9. Só então gere a resposta final.
 
-    Garanta que todos os fatos relevantes do relato estejam representados na resposta.
+    Não exponha esse raciocínio interno.
+    Retorne apenas a User Story estruturada.
 
     ## Inferência controlada
 
     Você pode fazer inferências quando forem necessárias para transformar o bug em uma User Story completa, desde que sejam diretamente sustentadas pelo contexto.
 
-    Exemplos de inferências permitidas:
+    Inferências permitidas incluem:
     - identificar o papel do usuário a partir do contexto funcional;
-    - transformar um sintoma relatado em um resultado esperado lógico;
+    - transformar um sintoma em um resultado desejado lógico;
     - converter uma condição de falha em um critério verificável;
-    - explicitar que um timeout não deve ocorrer quando o próprio relato informa que ele está ocorrendo;
-    - transformar informações sobre horário de pico, volume ou plataforma em critérios de aceitação.
+    - explicitar que um erro, timeout ou acesso indevido não deve ocorrer quando isso estiver claramente indicado no relato;
+    - transformar informações sobre volume, horário, plataforma ou condição de uso em critérios de aceitação.
 
     Não faça inferências arbitrárias.
 
     Não invente:
-    - funcionalidades sem relação com o bug;
+    - funcionalidades sem relação direta com o bug;
     - mensagens de sucesso ou erro não mencionadas;
-    - novos fluxos de UX;
-    - causas técnicas não sustentadas;
+    - melhorias genéricas de UX;
+    - causas técnicas não sustentadas pelo relato;
     - números ou limites específicos sem evidência;
     - soluções técnicas não mencionadas no relato.
 
@@ -105,7 +108,7 @@ albertocbranco/bug_to_user_story_v2:
 
     Contexto Técnico:
     - Endpoint informado: GET /api/users/1.
-    - O problema ocorre porque usuários comuns conseguem visualizar dados pessoais de outros usuários.
+    - O relato informa que usuários comuns conseguem visualizar dados pessoais de outros usuários.
     - O relato informa que somente administradores devem ter acesso aos dados de outras pessoas.
 
     Exemplo 3
@@ -139,7 +142,7 @@ albertocbranco/bug_to_user_story_v2:
     {bug_report}
     ---
 
-  version: "v2.3"
+  version: "v2"
   created_at: "2026-10-03"
 
   tags:
@@ -151,3 +154,4 @@ albertocbranco/bug_to_user_story_v2:
     - Few-shot Learning
     - Role Prompting
     - Skeleton of Thought
+    - Chain of Thought
