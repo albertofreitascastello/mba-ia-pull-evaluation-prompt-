@@ -7,7 +7,7 @@ from langsmith import Client
 from utils import save_yaml,print_section_header
 
 load_dotenv()
-PROMPT_NAME = "leonanluppi/bug_to_user_story_v1"
+PROMPT_NAME = f"{os.getenv('USERNAME_LANGSMITH_HUB', 'albertocbranco').strip()}/bug_to_user_story_v2"
     
 def pull_prompts_from_langsmith():
     """Função para puxar prompts do LangSmith Hub"""
@@ -47,7 +47,7 @@ def format_prompt_content(prompt):
             "description": "Prompt para converter relatos de bugs em User Stories",
             "system_prompt": system_prompt,
             "user_prompt": user_prompt,
-            "version": "v1",
+            "version": "v2",
             "created_at": "2025-01-15",
             "tags": [
                 "bug-analysis",
